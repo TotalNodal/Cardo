@@ -1,0 +1,6 @@
+@Cardo.Services.CouponAPI_HostAddress = http://localhost:5162
+
+GET {{Cardo.Services.CouponAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
