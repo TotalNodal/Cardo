@@ -52,7 +52,8 @@ namespace Cardo.Services.AuthAPI.Service
             }
 
             //if user was found then Generate Jwt Token
-            var token = _jwTokenGenerator.GenerateToken(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var token = _jwTokenGenerator.GenerateToken(user,roles);
 
             UserDto userDto = new()
             {

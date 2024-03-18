@@ -4,6 +4,6 @@ namespace Cardo.Services.AuthAPI.Service.IService
 {
     public interface IJwTokenGenerator
     {
-        string GenerateToken(ApplicationUser applicationUser);
+        string GenerateToken(ApplicationUser applicationUser, IEnumerable<string>roles);
     }
 }
