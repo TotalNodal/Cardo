@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardo.Web", "Cardo.Web\Card
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardo.Services.AuthAPI", "Cardo.Services.AuthAPI\Cardo.Services.AuthAPI.csproj", "{04A8B344-DED9-40A5-A6FF-EED7A136E59E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardo.Services.ProductAPI", "Cardo.Services.ProductAPI\Cardo.Services.ProductAPI.csproj", "{E0AC768F-1A08-4AF7-B485-3F8D3C370670}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardo.Services.ProductAPI", "Cardo.Services.ProductAPI\Cardo.Services.ProductAPI.csproj", "{E0AC768F-1A08-4AF7-B485-3F8D3C370670}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardo.Services.ShoppingCartAPI", "Cardo.Services.ShoppingCartAPI\Cardo.Services.ShoppingCartAPI.csproj", "{E2EE8186-DD32-4870-8436-A9A07DBF16A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{E0AC768F-1A08-4AF7-B485-3F8D3C370670}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0AC768F-1A08-4AF7-B485-3F8D3C370670}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0AC768F-1A08-4AF7-B485-3F8D3C370670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2EE8186-DD32-4870-8436-A9A07DBF16A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2EE8186-DD32-4870-8436-A9A07DBF16A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2EE8186-DD32-4870-8436-A9A07DBF16A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2EE8186-DD32-4870-8436-A9A07DBF16A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{56047283-016D-4074-A252-5C4E7F504E0B} = {FBE15DF8-CD25-4A00-B0D7-FB42FC1EBDAD}
 		{04A8B344-DED9-40A5-A6FF-EED7A136E59E} = {C778CD73-9C97-4B0F-ADCA-A0BF2B26A91E}
 		{E0AC768F-1A08-4AF7-B485-3F8D3C370670} = {C778CD73-9C97-4B0F-ADCA-A0BF2B26A91E}
+		{E2EE8186-DD32-4870-8436-A9A07DBF16A2} = {C778CD73-9C97-4B0F-ADCA-A0BF2B26A91E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {89DC78DB-241E-49E6-BC24-CAB495CF4725}
