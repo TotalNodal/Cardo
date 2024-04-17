@@ -1,8 +1,11 @@
+using System.Collections.Immutable;
 using System.Text;
 using AutoMapper;
 using Cardo.Services.ShoppingCartAPI;
 using Cardo.Services.ShoppingCartAPI.Data;
 using Cardo.Services.ShoppingCartAPI.Extensions;
+using Cardo.Services.ShoppingCartAPI.Service;
+using Cardo.Services.ShoppingCartAPI.Service.IService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -21,6 +24,13 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICouponService, CouponService>();
+//adds http client to consume product api
+builder.Services.AddHttpClient("Product", u => u.BaseAddress =
+    new Uri(builder.Configuration["ServiceUrls:ProductAPI"]));
+builder.Services.AddHttpClient("Coupon", u => u.BaseAddress =
+    new Uri(builder.Configuration["ServiceUrls:CouponAPI"]));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
