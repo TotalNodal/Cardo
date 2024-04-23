@@ -1,4 +1,5 @@
-﻿using Cardo.Services.AuthAPI.Models.Dto;
+﻿using Cardo.MessageBus;
+using Cardo.Services.AuthAPI.Models.Dto;
 using Cardo.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,14 @@ namespace Cardo.Services.AuthAPI.Controllers
     public class AuthAPIController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IMessageBus _messageBus;
+        private readonly IConfiguration _configuration;
         protected ResponseDto _response;
 
-        public AuthAPIController(IAuthService authService)
+        public AuthAPIController(IAuthService authService, IMessageBus messageBus, IConfiguration configuration)
         {
+            _configuration = configuration;
+            _messageBus = messageBus;
             _authService = authService;
             _response = new();
         }
@@ -29,6 +34,9 @@ namespace Cardo.Services.AuthAPI.Controllers
                 _response.Message = errorMessage;
                 return BadRequest(_response);
             }
+
+            await _messageBus.PublishMessage(model.Email,
+                _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue"));
             return Ok(_response);
         }
 
