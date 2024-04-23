@@ -1,4 +1,4 @@
-﻿namespace Cardo.Web.Models
+﻿namespace Cardo.Services.EmailAPI.Models.Dto
 {
     public class CartHeaderDto
     {

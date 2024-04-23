@@ -4,12 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>79a326e1-582e-4264-8c22-9687be85e24c</UserSecretsId>
+    <UserSecretsId>199c42f9-ac70-47eb-a212-6adbeee743bd</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
 	  <PackageReference Include="AutoMapper" Version="13.0.1" />
+	  <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.17.5" />
 	  <PackageReference Include="IdentityModel" Version="7.0.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
@@ -25,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cardo.MessageBus\Cardo.MessageBus.csproj" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

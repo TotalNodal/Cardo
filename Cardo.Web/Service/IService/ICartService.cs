@@ -8,5 +8,6 @@ namespace Cardo.Web.Service.IService
         Task<ResponseDto?> UpsertCartAsync(CartDto cartDto);
         Task<ResponseDto?> RemoveFromCartAsync(int cartDetailsId);
         Task<ResponseDto?> ApplyCouponAsync(CartDto cartDto);
+        Task<ResponseDto?> EmailCart(CartDto cartDto);
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.PortableExecutable;
+using Cardo.MessageBus;
 using Cardo.Services.ShoppingCartAPI.Service.IService;
 
 namespace Cardo.Services.ShoppingCartAPI.Controllers
@@ -19,15 +20,20 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
         private readonly AppDbContext _db;
         private IProductService _productService;
         private ICouponService _couponService;
+        private IConfiguration _configuration;
+        private readonly IMessageBus _messageBus;
 
         public CartAPIController(IMapper mapper, AppDbContext db,
-            IProductService productService, ICouponService couponService)
+            IProductService productService, ICouponService couponService,
+            IMessageBus messageBus, IConfiguration configuration)
         {
             _mapper = mapper;
+            _messageBus = messageBus;
             _db = db;
             _productService = productService;
             _couponService = couponService;
             this._response = new ResponseDto();
+            _configuration = configuration;
         }
 
 
@@ -81,6 +87,22 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
                 cartFromDb.CouponCode= cartDto.CartHeader.CouponCode;
                 _db.CartHeaders.Update(cartFromDb);
                 await _db.SaveChangesAsync();
+                _response.Result = true;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.ToString();
+            }
+            return _response;
+        }
+
+        [HttpPost("EmailCartRequest")]
+        public async Task<object> EmailCartRequest([FromBody] CartDto cartDto)
+        {
+            try
+            {
+                await _messageBus.PublishMessage(cartDto, _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue"));
                 _response.Result = true;
             }
             catch (Exception ex)

@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Text;
 using AutoMapper;
+using Cardo.MessageBus;
 using Cardo.Services.ShoppingCartAPI;
 using Cardo.Services.ShoppingCartAPI.Data;
 using Cardo.Services.ShoppingCartAPI.Extensions;
@@ -29,6 +30,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
 builder.Services.AddScoped<ICouponService, CouponService>();
+builder.Services.AddScoped<IMessageBus, MessageBus>();
 //adds http client to consume product api
 builder.Services.AddHttpClient("Product", u => u.BaseAddress = 
     new Uri(builder.Configuration["ServiceUrls:ProductAPI"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
