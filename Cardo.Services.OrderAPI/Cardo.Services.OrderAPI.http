@@ -1,0 +1,6 @@
+@Cardo.Services.OrderAPI_HostAddress = http://localhost:5210
+
+GET {{Cardo.Services.OrderAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
