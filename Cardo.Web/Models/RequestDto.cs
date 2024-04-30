@@ -1,5 +1,4 @@
-﻿using System.Security.AccessControl;
-using static Cardo.Web.Utility.SD;
+﻿using static Cardo.Web.Utility.SD;
 
 namespace Cardo.Web.Models
 {
@@ -9,6 +8,8 @@ namespace Cardo.Web.Models
         public string Url { get; set; }
         public object Data { get; set; }
         public string AcessToken { get; set; }
+
+        public ContentType ContentType { get; set; } = ContentType.Json;
         
     }
 }
