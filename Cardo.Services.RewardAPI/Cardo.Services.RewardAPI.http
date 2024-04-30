@@ -1,0 +1,6 @@
+@Cardo.Services.RewardAPI_HostAddress = http://localhost:5045
+
+GET {{Cardo.Services.RewardAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

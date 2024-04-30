@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardo.Services.EmailAPI", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardo.Services.OrderAPI", "Cardo.Services.OrderAPI\Cardo.Services.OrderAPI.csproj", "{992BB351-C3E7-463B-A554-BDB5EDC2F975}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardo.Services.RewardAPI", "Cardo.Services.RewardAPI\Cardo.Services.RewardAPI.csproj", "{57F23E41-A13C-464F-9AE8-95D7AA046531}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{992BB351-C3E7-463B-A554-BDB5EDC2F975}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{992BB351-C3E7-463B-A554-BDB5EDC2F975}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{992BB351-C3E7-463B-A554-BDB5EDC2F975}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F23E41-A13C-464F-9AE8-95D7AA046531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F23E41-A13C-464F-9AE8-95D7AA046531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F23E41-A13C-464F-9AE8-95D7AA046531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F23E41-A13C-464F-9AE8-95D7AA046531}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{4F61A6E8-24E6-4857-91A4-CB7E6B4BCEB6} = {06E59DFB-81F6-45AE-82C7-28DFDB396A79}
 		{71F4ABEE-D02B-40EC-A962-7535FC863144} = {C778CD73-9C97-4B0F-ADCA-A0BF2B26A91E}
 		{992BB351-C3E7-463B-A554-BDB5EDC2F975} = {C778CD73-9C97-4B0F-ADCA-A0BF2B26A91E}
+		{57F23E41-A13C-464F-9AE8-95D7AA046531} = {C778CD73-9C97-4B0F-ADCA-A0BF2B26A91E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {89DC78DB-241E-49E6-BC24-CAB495CF4725}

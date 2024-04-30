@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using Cardo.Services.EmailAPI.Data;
+using Cardo.Services.EmailAPI.Message;
 using Cardo.Services.EmailAPI.Models;
 using Cardo.Services.EmailAPI.Models.Dto;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,12 @@ namespace Cardo.Services.EmailAPI.Services
             message.AppendLine("</ul>");
 
             await LogAndEmail(message.ToString(), cartDto.CartHeader.Email);
+        }
+
+        public async Task LogOrderPlaced(RewardsMessage rewardsDto)
+        {
+            string message = "New Order Placed. <br/> Order ID : " + rewardsDto.OrderId;
+            await LogAndEmail(message, "josh0597@stud.kea.dk");
         }
 
         public async Task RegisterUserEmailAndLog(string email)
