@@ -35,5 +35,15 @@ namespace Cardo.Web.Service
                 Url = SD.OrderAPIBase + "/api/order/CreateStripeSession"
             });
         }
+
+        public async Task<ResponseDto?> ValidateStripeSession(int orderHeaderID)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = orderHeaderID,
+                Url = SD.OrderAPIBase + "/api/order/ValidateStripeSession"
+            });
+        }
     }
 }

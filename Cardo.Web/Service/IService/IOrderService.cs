@@ -6,6 +6,7 @@ namespace Cardo.Web.Service.IService
     {
         Task<ResponseDto?> CreateOrder(CartDto cartDto);
         Task<ResponseDto?> CreateStripeSession(StripeRequestDto stripeRequestDto);
+        Task<ResponseDto?> ValidateStripeSession(int orderHeaderID);
 
     }
 }
