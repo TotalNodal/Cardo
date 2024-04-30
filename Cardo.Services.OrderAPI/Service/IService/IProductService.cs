@@ -1,7 +1,7 @@
 ﻿
 using Cardo.Services.OrderAPI.Models.Dto;
 
-namespace Cardo.Services.OrderAPI.Service.IService
+namespace Cardo.Services.ShoppingCartAPI.Service.IService
 {
     public interface IProductService
     {

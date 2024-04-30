@@ -5,8 +5,8 @@ using Cardo.Services.OrderAPI;
 using Cardo.Services.OrderAPI.Data;
 using Cardo.Services.OrderAPI.Utility;
 using Cardo.Services.ShoppingCartAPI.Extensions;
-using Cardo.Services.OrderAPI.Service;
-using Cardo.Services.OrderAPI.Service.IService;
+using Cardo.Services.ShoppingCartAPI.Service;
+using Cardo.Services.ShoppingCartAPI.Service.IService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -75,6 +75,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+Stripe.StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

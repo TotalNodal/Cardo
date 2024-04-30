@@ -31,8 +31,8 @@ namespace Cardo.Web.Controllers
         }
 
         [HttpPost]
-        [ActionName("CheckOut")]
-        public async Task<IActionResult> CheckOut(CartDto cartDto)
+        [ActionName("Checkout")]
+        public async Task<IActionResult> Checkout(CartDto cartDto)
         {
 
             CartDto cart = await LoadCartDtoBasedOnLoggedInUser();
@@ -45,10 +45,38 @@ namespace Cardo.Web.Controllers
 
             if (response != null && response.IsSuccess)
             {
-                // get stripe session and redirect to stripe to place order
-            }
+                //get stripe session and redirect to stripe to place order
+                //
+                var domain = Request.Scheme + "://" + Request.Host.Value + "/";
 
+                StripeRequestDto stripeRequestDto = new()
+                {
+                    ApprovedUrl = domain + "cart/Confirmation?orderId=" + orderHeaderDto.OrderHeaderId,
+                    CancelUrl = domain + "cart/checkout",
+                    OrderHeader = orderHeaderDto
+                };
+
+                var stripeResponse = await _orderService.CreateStripeSession(stripeRequestDto);
+                StripeRequestDto stripeResponseResult = JsonConvert.DeserializeObject<StripeRequestDto>
+                    (Convert.ToString(stripeResponse.Result));
+                Response.Headers.Add("Location", stripeResponseResult.StripeSessionUrl);
+                return new StatusCodeResult(303);
+                if (stripeResponseResult != null)
+                {
+                    Response.Headers.Add("Location", stripeResponseResult.StripeSessionUrl);
+                    return new StatusCodeResult(303);
+                }
+
+
+            }
             return View();
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> Confirmation(int orderId)
+        {
+            return View(orderId);
         }
 
         public async Task<IActionResult> Remove(int cartDetailsId)

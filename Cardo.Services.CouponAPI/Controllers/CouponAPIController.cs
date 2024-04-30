@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Cardo.Services.CouponAPI.Data;
-using Cardo.Services.CouponAPI.Models;
 using Cardo.Services.CouponAPI.Models.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Coupon = Cardo.Services.CouponAPI.Models.Coupon;
 
 namespace Cardo.Services.CouponAPI.Controllers
 {
@@ -88,6 +88,22 @@ namespace Cardo.Services.CouponAPI.Controllers
                 //save changes to db
                 _db.SaveChanges();
 
+
+
+                
+                var options = new Stripe.CouponCreateOptions
+                {
+                    AmountOff = (long)(couponDto.DiscountAmount*100),
+                    Name = couponDto.CouponCode,
+                    Currency = "dkk",
+                    Id = couponDto.CouponCode,
+
+                };
+                var service = new Stripe.CouponService();
+                service.Create(options);
+
+
+
                 _response.Result = _mapper.Map<CouponDto>(obj);
             }
             catch (Exception e)
@@ -135,6 +151,13 @@ namespace Cardo.Services.CouponAPI.Controllers
                 //save changes to db
                 _db.SaveChanges();
                 //Add tombstone pattern here
+
+
+
+                
+                var service = new Stripe.CouponService();
+                service.Delete(obj.CouponCode);
+
 
             }
             catch (Exception e)

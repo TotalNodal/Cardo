@@ -1,8 +1,8 @@
 ﻿using Cardo.Services.OrderAPI.Models.Dto;
-using Cardo.Services.OrderAPI.Service.IService;
+using Cardo.Services.ShoppingCartAPI.Service.IService;
 using Newtonsoft.Json;
 
-namespace Cardo.Services.OrderAPI.Service
+namespace Cardo.Services.ShoppingCartAPI.Service
 {
     public class ProductService : IProductService
     {
