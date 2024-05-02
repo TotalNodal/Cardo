@@ -8,6 +8,9 @@ using Coupon = Cardo.Services.CouponAPI.Models.Coupon;
 
 namespace Cardo.Services.CouponAPI.Controllers
 {
+    /// <summary>
+    /// Controller for managing coupons in the web shop.
+    /// </summary>
     [Route("api/coupon")]
     [ApiController]
     [Authorize]
@@ -16,6 +19,12 @@ namespace Cardo.Services.CouponAPI.Controllers
         private readonly AppDbContext _db;
         private ResponseDto _response;
         private IMapper _mapper;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CouponAPIController"/> class.
+        /// </summary>
+        /// <param name="db">The database context.</param>
+        /// <param name="mapper">The AutoMapper instance.</param>
         public CouponAPIController(AppDbContext db, IMapper mapper)
         {
             _db = db;
@@ -23,6 +32,10 @@ namespace Cardo.Services.CouponAPI.Controllers
             _response = new ResponseDto();
         }
 
+        /// <summary>
+        /// Retrieves all coupons.
+        /// </summary>
+        /// <returns>The response containing the list of coupons.</returns>
         [HttpGet]
         public ResponseDto Get()
         {
@@ -40,6 +53,11 @@ namespace Cardo.Services.CouponAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Retrieves a specific coupon by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the coupon.</param>
+        /// <returns>The response containing the coupon.</returns>
         [HttpGet]
         [Route("{id:int}")]
         public ResponseDto Get(int id)
@@ -58,6 +76,11 @@ namespace Cardo.Services.CouponAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Retrieves a specific coupon by its code.
+        /// </summary>
+        /// <param name="code">The code of the coupon.</param>
+        /// <returns>The response containing the coupon.</returns>
         [HttpGet]
         [Route("GetByCode/{code}")]
         public ResponseDto GetByCode(string code)
@@ -76,6 +99,11 @@ namespace Cardo.Services.CouponAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Adds a new coupon.
+        /// </summary>
+        /// <param name="couponDto">The coupon to add.</param>
+        /// <returns>The response containing the added coupon.</returns>
         [HttpPost]
         [Authorize(Roles = "ADMIN")]
         public ResponseDto Post([FromBody] CouponDto couponDto)
@@ -115,6 +143,11 @@ namespace Cardo.Services.CouponAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Updates an existing coupon.
+        /// </summary>
+        /// <param name="couponDto">The coupon to update.</param>
+        /// <returns>The response containing the updated coupon.</returns>
         [HttpPut]
         [Authorize(Roles = "ADMIN")]
         public ResponseDto Put([FromBody] CouponDto couponDto)
@@ -138,6 +171,11 @@ namespace Cardo.Services.CouponAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Deletes a coupon by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the coupon to delete.</param>
+        /// <returns>The response indicating the result of the deletion.</returns>
         [HttpDelete]
         [Route("{id:int}")]
         [Authorize(Roles = "ADMIN")]

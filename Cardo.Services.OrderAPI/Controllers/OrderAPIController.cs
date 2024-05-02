@@ -14,6 +14,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.OrderAPI.Controllers
 {
+    /// <summary>
+    /// Controller for managing orders.
+    /// </summary>
     [Route("api/order")]
     [ApiController]
     public class OrderAPIController : ControllerBase
@@ -25,6 +28,14 @@ namespace Mango.Services.OrderAPI.Controllers
         private readonly IMessageBus _messageBus;
         private readonly IConfiguration _configuration;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderAPIController"/> class.
+        /// </summary>
+        /// <param name="db">The database context.</param>
+        /// <param name="productService">The product service.</param>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <param name="messageBus">The message bus.</param>
         public OrderAPIController(AppDbContext db,
             IProductService productService, IMapper mapper, IConfiguration configuration
             , IMessageBus messageBus)
@@ -37,6 +48,11 @@ namespace Mango.Services.OrderAPI.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the orders.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>The response containing the orders.</returns>
         [Authorize]
         [HttpGet("GetOrders")]
         public ResponseDto? Get(string? userId = "")
@@ -66,6 +82,11 @@ namespace Mango.Services.OrderAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Gets the order by identifier.
+        /// </summary>
+        /// <param name="id">The order identifier.</param>
+        /// <returns>The response containing the order.</returns>
         [Authorize]
         [HttpGet("GetOrder/{id:int}")]
         public ResponseDto? Get(int id)
@@ -86,7 +107,11 @@ namespace Mango.Services.OrderAPI.Controllers
         }
 
 
-
+        /// <summary>
+        /// Creates an order.
+        /// </summary>
+        /// <param name="cartDto">The cart DTO.</param>
+        /// <returns>The response containing the created order.</returns>
         [Authorize]
         [HttpPost("CreateOrder")]
         public async Task<ResponseDto> CreateOrder([FromBody] CartDto cartDto)
@@ -113,7 +138,11 @@ namespace Mango.Services.OrderAPI.Controllers
             return _response;
         }
 
-
+        /// <summary>
+        /// Creates a Stripe session.
+        /// </summary>
+        /// <param name="stripeRequestDto">The Stripe request DTO.</param>
+        /// <returns>The response containing the Stripe session URL.</returns>
         [Authorize]
         [HttpPost("CreateStripeSession")]
         public async Task<ResponseDto> CreateStripeSession([FromBody] StripeRequestDto stripeRequestDto)
@@ -182,7 +211,11 @@ namespace Mango.Services.OrderAPI.Controllers
             return _response;
         }
 
-
+        /// <summary>
+        /// Validates the Stripe session.
+        /// </summary>
+        /// <param name="orderHeaderId">The order header identifier.</param>
+        /// <returns>The response indicating the validation result.</returns>
         [Authorize]
         [HttpPost("ValidateStripeSession")]
         public async Task<ResponseDto> ValidateStripeSession([FromBody] int orderHeaderId)
@@ -225,6 +258,12 @@ namespace Mango.Services.OrderAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Updates the order status.
+        /// </summary>
+        /// <param name="orderId">The order identifier.</param>
+        /// <param name="newStatus">The new status.</param>
+        /// <returns>The response indicating the result of the status update.</returns>
         [Authorize]
         [HttpPost("UpdateOrderStatus/{orderId:int}")]
         public async Task<ResponseDto> UpdateOrderStatus(int orderId, [FromBody] string newStatus)

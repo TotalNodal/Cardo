@@ -8,14 +8,27 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Cardo.Services.AuthAPI.Service
 {
+    /// <summary>
+    /// Service for generating JWT tokens.
+    /// </summary>
     public class JwtTokenGenerator : IJwTokenGenerator
     {
         private readonly JwtOptions _jwtOptions;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JwtTokenGenerator"/> class.
+        /// </summary>
+        /// <param name="jwtOptions">The JWT options.</param>
         public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions)
         {
             _jwtOptions = jwtOptions.Value;
         }
 
+        /// <summary>
+        /// Generates a JWT token for the specified user with the given roles.
+        /// </summary>
+        /// <param name="applicationUser">The user for whom the token is generated.</param>
+        /// <param name="roles">The roles assigned to the user.</param>
+        /// <returns>The generated JWT token.</returns>
         public string GenerateToken(ApplicationUser applicationUser, IEnumerable<string> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

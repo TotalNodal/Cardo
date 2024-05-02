@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cardo.Services.ProductAPI.Controllers
 {
+    /// <summary>
+    /// Controller for managing products in the web shop microservice.
+    /// </summary>
     [Route("api/product")]
     [ApiController]
     public class ProductAPIController : ControllerBase
@@ -16,6 +19,12 @@ namespace Cardo.Services.ProductAPI.Controllers
         private readonly AppDbContext _db;
         private ResponseDto _response;
         private IMapper _mapper;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductAPIController"/> class.
+        /// </summary>
+        /// <param name="db">The database context.</param>
+        /// <param name="mapper">The AutoMapper instance.</param>
         public ProductAPIController(AppDbContext db, IMapper mapper)
         {
             _db = db;
@@ -23,6 +32,11 @@ namespace Cardo.Services.ProductAPI.Controllers
             _response = new ResponseDto();
         }
 
+
+        /// <summary>
+        /// Retrieves all products.
+        /// </summary>
+        /// <returns>The response containing the list of products.</returns>
         [HttpGet]
         public ResponseDto Get()
         {
@@ -40,6 +54,11 @@ namespace Cardo.Services.ProductAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Retrieves a specific product by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the product.</param>
+        /// <returns>The response containing the product.</returns>
         [HttpGet]
         [Route("{id:int}")]
         public ResponseDto Get(int id)
@@ -58,7 +77,11 @@ namespace Cardo.Services.ProductAPI.Controllers
             return _response;
         }
 
-
+        /// <summary>
+        /// Adds a new product.
+        /// </summary>
+        /// <param name="ProductDto">The product to add.</param>
+        /// <returns>The response containing the added product.</returns>
         [HttpPost]
         [Authorize(Roles = "ADMIN")]
         public ResponseDto Post(ProductDto ProductDto)
@@ -103,6 +126,11 @@ namespace Cardo.Services.ProductAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Updates an existing product.
+        /// </summary>
+        /// <param name="ProductDto">The product to update.</param>
+        /// <returns>The response containing the updated product.</returns>
         [HttpPut]
         [Authorize(Roles = "ADMIN")]
         public ResponseDto Put(ProductDto ProductDto)
@@ -154,6 +182,11 @@ namespace Cardo.Services.ProductAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Deletes a product by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the product to delete.</param>
+        /// <returns>The response indicating the result of the deletion.</returns>
         [HttpDelete]
         [Route("{id:int}")]
         [Authorize(Roles = "ADMIN")]

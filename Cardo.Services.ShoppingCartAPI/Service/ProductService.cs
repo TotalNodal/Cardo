@@ -4,14 +4,26 @@ using Newtonsoft.Json;
 
 namespace Cardo.Services.ShoppingCartAPI.Service
 {
+    /// <summary>
+    /// Service class responsible for interacting with product-related functionalities.
+    /// </summary>
     public class ProductService : IProductService
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductService"/> class.
+        /// </summary>
+        /// <param name="clientFactory">The HTTP client factory.</param>
         public ProductService(IHttpClientFactory clientFactory)
         {
             _httpClientFactory = clientFactory;
         }
+
+        /// <summary>
+        /// Retrieves the list of products asynchronously.
+        /// </summary>
+        /// <returns>The list of products if retrieval is successful; otherwise, an empty list.</returns>
         public async Task<IEnumerable<ProductDto>> GetProducts()
         {
             var client = _httpClientFactory.CreateClient("Product");

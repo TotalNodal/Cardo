@@ -6,6 +6,9 @@ using Newtonsoft.Json;
 
 namespace Cardo.Services.RewardAPI.Messaging
 {
+    /// <summary>
+    /// Represents a consumer for Azure Service Bus messages.
+    /// </summary>
     public class AzureServiceBusConsumer : IAzureServiceBusConsumer
     {
         private readonly string serviceBusConnectionString;
@@ -17,6 +20,11 @@ namespace Cardo.Services.RewardAPI.Messaging
         private ServiceBusProcessor _rewardProcessor;
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AzureServiceBusConsumer"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration containing service bus connection information.</param>
+        /// <param name="rewardService">The service for handling rewards.</param>
         public AzureServiceBusConsumer(IConfiguration configuration, RewardService rewardService)
         {
             _rewardService = rewardService;
@@ -32,6 +40,9 @@ namespace Cardo.Services.RewardAPI.Messaging
             _rewardProcessor = client.CreateProcessor(orderCreatedTopic,orderCreatedRewardSubscription);
         }
 
+        /// <summary>
+        /// Starts processing messages from Azure Service Bus.
+        /// </summary>
         public async Task Start()
         {
             _rewardProcessor.ProcessMessageAsync += OnNewOrderRewardsRequestReceived;
@@ -40,7 +51,9 @@ namespace Cardo.Services.RewardAPI.Messaging
 
         }
 
-
+        /// <summary>
+        /// Stops processing messages from Azure Service Bus.
+        /// </summary>
         public async Task Stop()
         {
             await _rewardProcessor.StartProcessingAsync();
@@ -54,24 +67,24 @@ namespace Cardo.Services.RewardAPI.Messaging
             var message = args.Message;
             var body = Encoding.UTF8.GetString(message.Body);
 
-            //receiving a CartDto here and deserialize it
+            // Deserialize the message body into a RewardsMessage object
             RewardsMessage objMessage = JsonConvert.DeserializeObject<RewardsMessage>(body);
             try
             {
-                //TOTO - try to log email
+                // Update rewards based on the received message
                 await _rewardService.UpdateRewards(objMessage);
                 await args.CompleteMessageAsync(args.Message);
             }
             catch (Exception ex)
             {
-                //log error
+                // Log error and rethrow
                 throw;
             }
         }
        
         private Task ErrorHandler(ProcessErrorEventArgs args)
         {
-            //can also send email someone here if an error occurs
+            // Handle and log errors
             Console.WriteLine(args.Exception.ToString());
             return Task.CompletedTask;
             

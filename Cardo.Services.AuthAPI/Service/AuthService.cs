@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Cardo.Services.AuthAPI.Service
 {
+    /// <summary>
+    /// Service for user authentication and authorization.
+    /// </summary>
     public class AuthService : IAuthService
     {
         private readonly AppDbContext _db;
@@ -13,6 +16,13 @@ namespace Cardo.Services.AuthAPI.Service
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IJwTokenGenerator _jwTokenGenerator;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthService"/> class.
+        /// </summary>
+        /// <param name="db">The database context.</param>
+        /// <param name="jwTokenGenerator">The JWT token generator.</param>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="roleManager">The role manager.</param>
         public AuthService(AppDbContext db,
             IJwTokenGenerator jwTokenGenerator,
             UserManager<ApplicationUser> userManager,
@@ -24,6 +34,12 @@ namespace Cardo.Services.AuthAPI.Service
             _roleManager = roleManager;
         }
 
+        /// <summary>
+        /// Assigns a role to a user.
+        /// </summary>
+        /// <param name="email">The email of the user.</param>
+        /// <param name="roleName">The name of the role to assign.</param>
+        /// <returns>True if the role was assigned successfully, otherwise false.</returns>
         public async Task<bool> AssignRole(string email, string roleName)
         {
             var user = _db.ApplicationUsers.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
@@ -40,6 +56,11 @@ namespace Cardo.Services.AuthAPI.Service
             return false;
         }
 
+        /// <summary>
+        /// Logs in a user.
+        /// </summary>
+        /// <param name="loginRequestDto">The login request DTO.</param>
+        /// <returns>A login response DTO containing the user information and JWT token.</returns>
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
             var user = _db.ApplicationUsers.FirstOrDefault(u => u.UserName.ToLower() == loginRequestDto.UserName.ToLower());
@@ -72,6 +93,11 @@ namespace Cardo.Services.AuthAPI.Service
             return loginResponseDto;
         }
 
+        /// <summary>
+        /// Registers a new user.
+        /// </summary>
+        /// <param name="registrationRequestDto">The registration request DTO.</param>
+        /// <returns>A message indicating the result of the registration process.</returns>
         public async Task<string> Register(RegistrationRequestDto registrationRequestDto)
         {
             ApplicationUser user = new()

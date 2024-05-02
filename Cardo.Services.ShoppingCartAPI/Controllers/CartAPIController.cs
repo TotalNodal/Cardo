@@ -11,6 +11,9 @@ using Cardo.Services.ShoppingCartAPI.Service.IService;
 
 namespace Cardo.Services.ShoppingCartAPI.Controllers
 {
+    /// <summary>
+    /// Controller for managing shopping cart operations.
+    /// </summary>
     [Route("api/cart")]
     [ApiController]
     public class CartAPIController : ControllerBase
@@ -23,6 +26,15 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
         private IConfiguration _configuration;
         private readonly IMessageBus _messageBus;
 
+        /// <summary>
+        /// Constructor for the CartAPIController class.
+        /// </summary>
+        /// <param name="mapper">An instance of AutoMapper IMapper.</param>
+        /// <param name="db">The application's database context.</param>
+        /// <param name="productService">The service for managing products.</param>
+        /// <param name="couponService">The service for managing coupons.</param>
+        /// <param name="messageBus">The message bus service for communication.</param>
+        /// <param name="configuration">Represents the application's configuration.</param>
         public CartAPIController(IMapper mapper, AppDbContext db,
             IProductService productService, ICouponService couponService,
             IMessageBus messageBus, IConfiguration configuration)
@@ -36,7 +48,11 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
             _configuration = configuration;
         }
 
-
+        /// <summary>
+        /// Retrieves the shopping cart for the specified user.
+        /// </summary>
+        /// <param name="userId">The ID of the user whose cart is being retrieved.</param>
+        /// <returns>A response containing the user's shopping cart.</returns>
         [HttpGet("GetCart/{userId}")]
         public async Task<ResponseDto> GetCart(string userId)
         {
@@ -78,6 +94,11 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Applies a coupon to the user's shopping cart.
+        /// </summary>
+        /// <param name="cartDto">The cart DTO containing the coupon code.</param>
+        /// <returns>A response indicating the success of applying the coupon.</returns>
         [HttpPost("ApplyCoupon")]
         public async Task<object> ApplyCoupon([FromBody] CartDto cartDto)
         {
@@ -97,6 +118,11 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Sends an email for the shopping cart request.
+        /// </summary>
+        /// <param name="cartDto">The cart DTO containing the email information.</param>
+        /// <returns>A response indicating the success of sending the email.</returns>
         [HttpPost("EmailCartRequest")]
         public async Task<object> EmailCartRequest([FromBody] CartDto cartDto)
         {
@@ -114,7 +140,11 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
         }
 
 
-
+        /// <summary>
+        /// Upserts (update/insert) the user's shopping cart.
+        /// </summary>
+        /// <param name="cartDto">The cart DTO containing the cart information to upsert.</param>
+        /// <returns>A response indicating the success of the upsert operation.</returns>
         [HttpPost("CartUpsert")]
         public async Task<ResponseDto> CartUpsert(CartDto cartDto)
         {
@@ -165,6 +195,11 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Removes an item from the shopping cart.
+        /// </summary>
+        /// <param name="cartDetailsId">The ID of the cart details to remove.</param>
+        /// <returns>A response indicating the success of removing the item from the cart.</returns>
         [HttpPost("RemoveCart")]
         public async Task<ResponseDto> RemoveCart([FromBody]int cartDetailsId)
         {
