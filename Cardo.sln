@@ -25,9 +25,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardo.MessageBus", "Cardo.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardo.Services.EmailAPI", "Cardo.Services.EmailAPI\Cardo.Services.EmailAPI.csproj", "{71F4ABEE-D02B-40EC-A962-7535FC863144}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardo.Services.OrderAPI", "Cardo.Services.OrderAPI\Cardo.Services.OrderAPI.csproj", "{992BB351-C3E7-463B-A554-BDB5EDC2F975}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardo.Services.OrderAPI", "Cardo.Services.OrderAPI\Cardo.Services.OrderAPI.csproj", "{992BB351-C3E7-463B-A554-BDB5EDC2F975}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardo.Services.RewardAPI", "Cardo.Services.RewardAPI\Cardo.Services.RewardAPI.csproj", "{57F23E41-A13C-464F-9AE8-95D7AA046531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardo.Services.RewardAPI", "Cardo.Services.RewardAPI\Cardo.Services.RewardAPI.csproj", "{57F23E41-A13C-464F-9AE8-95D7AA046531}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69EC1A78-C02A-4B3E-BC51-189E9615AE07}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
