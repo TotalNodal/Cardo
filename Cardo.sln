@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardo.GatewaySolution", "Cardo.GatewaySolution\Cardo.GatewaySolution.csproj", "{AE6200D7-4AD3-43E0-A278-306E24A71642}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{57F23E41-A13C-464F-9AE8-95D7AA046531}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57F23E41-A13C-464F-9AE8-95D7AA046531}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57F23E41-A13C-464F-9AE8-95D7AA046531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE6200D7-4AD3-43E0-A278-306E24A71642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE6200D7-4AD3-43E0-A278-306E24A71642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE6200D7-4AD3-43E0-A278-306E24A71642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE6200D7-4AD3-43E0-A278-306E24A71642}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{71F4ABEE-D02B-40EC-A962-7535FC863144} = {C778CD73-9C97-4B0F-ADCA-A0BF2B26A91E}
 		{992BB351-C3E7-463B-A554-BDB5EDC2F975} = {C778CD73-9C97-4B0F-ADCA-A0BF2B26A91E}
 		{57F23E41-A13C-464F-9AE8-95D7AA046531} = {C778CD73-9C97-4B0F-ADCA-A0BF2B26A91E}
+		{AE6200D7-4AD3-43E0-A278-306E24A71642} = {15970FFA-95B7-44A8-A54E-3877FED9BEC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {89DC78DB-241E-49E6-BC24-CAB495CF4725}
