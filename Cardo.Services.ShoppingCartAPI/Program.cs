@@ -5,6 +5,7 @@ using Cardo.MessageBus;
 using Cardo.Services.ShoppingCartAPI;
 using Cardo.Services.ShoppingCartAPI.Data;
 using Cardo.Services.ShoppingCartAPI.Extensions;
+using Cardo.Services.ShoppingCartAPI.RabbitMQSender;
 using Cardo.Services.ShoppingCartAPI.Service;
 using Cardo.Services.ShoppingCartAPI.Service.IService;
 using Cardo.Services.ShoppingCartAPI.Utility;
@@ -30,7 +31,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
 builder.Services.AddScoped<ICouponService, CouponService>();
-builder.Services.AddScoped<IMessageBus, MessageBus>();
+builder.Services.AddScoped<IRabbitMQCartMessageSender, RabbitMQCartMessageSender>();
 //adds http client to consume product api
 builder.Services.AddHttpClient("Product", u => u.BaseAddress = 
     new Uri(builder.Configuration["ServiceUrls:ProductAPI"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();

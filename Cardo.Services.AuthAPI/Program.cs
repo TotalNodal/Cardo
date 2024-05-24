@@ -1,6 +1,7 @@
 using Cardo.MessageBus;
 using Cardo.Services.AuthAPI.Data;
 using Cardo.Services.AuthAPI.Models;
+using Cardo.Services.AuthAPI.RabbitMQSender;
 using Cardo.Services.AuthAPI.Service;
 using Cardo.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Identity;
@@ -21,7 +22,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 builder.Services.AddControllers();
 builder.Services.AddScoped<IJwTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IMessageBus, MessageBus>();
+//builder.Services.AddScoped<IMessageBus, MessageBus>();
+builder.Services.AddScoped<IRabbitMQAuthMessageSender, RabbitMQAuthMessageSender>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

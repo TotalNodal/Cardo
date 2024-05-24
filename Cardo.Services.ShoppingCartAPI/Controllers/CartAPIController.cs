@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.PortableExecutable;
 using Cardo.MessageBus;
+using Cardo.Services.ShoppingCartAPI.RabbitMQSender;
 using Cardo.Services.ShoppingCartAPI.Service.IService;
 
 namespace Cardo.Services.ShoppingCartAPI.Controllers
@@ -24,7 +25,7 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
         private IProductService _productService;
         private ICouponService _couponService;
         private IConfiguration _configuration;
-        private readonly IMessageBus _messageBus;
+        private readonly IRabbitMQCartMessageSender _messageBus;
 
         /// <summary>
         /// Constructor for the CartAPIController class.
@@ -37,7 +38,7 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
         /// <param name="configuration">Represents the application's configuration.</param>
         public CartAPIController(IMapper mapper, AppDbContext db,
             IProductService productService, ICouponService couponService,
-            IMessageBus messageBus, IConfiguration configuration)
+            IRabbitMQCartMessageSender messageBus, IConfiguration configuration)
         {
             _mapper = mapper;
             _messageBus = messageBus;
@@ -128,7 +129,7 @@ namespace Cardo.Services.ShoppingCartAPI.Controllers
         {
             try
             {
-                await _messageBus.PublishMessage(cartDto, _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue"));
+                _messageBus.SendMessage(cartDto, _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue"));
                 _response.Result = true;
             }
             catch (Exception ex)

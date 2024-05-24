@@ -3,6 +3,7 @@ using Cardo.MessageBus;
 using Cardo.Services.OrderAPI.Data;
 using Cardo.Services.OrderAPI.Models;
 using Cardo.Services.OrderAPI.Models.Dto;
+using Cardo.Services.OrderAPI.RabbitMQSender;
 using Cardo.Services.ShoppingCartAPI.Service.IService;
 using Cardo.Services.OrderAPI.Utility;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,7 @@ namespace Mango.Services.OrderAPI.Controllers
         private IMapper _mapper;
         private readonly AppDbContext _db;
         private IProductService _productService;
-        private readonly IMessageBus _messageBus;
+        private readonly IRabbitMQOrderMessageSender _messageBus;
         private readonly IConfiguration _configuration;
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace Mango.Services.OrderAPI.Controllers
         /// <param name="messageBus">The message bus.</param>
         public OrderAPIController(AppDbContext db,
             IProductService productService, IMapper mapper, IConfiguration configuration
-            , IMessageBus messageBus)
+            , IRabbitMQOrderMessageSender messageBus)
         {
             _db = db;
             _messageBus = messageBus;
@@ -244,7 +245,7 @@ namespace Mango.Services.OrderAPI.Controllers
                     };
 
                     string topicName = _configuration.GetValue<string>("TopicAndQueueNames:OrderCreatedTopic");
-                    await _messageBus.PublishMessage(rewardsDto, topicName);
+                    _messageBus.SendMessage(rewardsDto, topicName);
                     _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
                 }
 

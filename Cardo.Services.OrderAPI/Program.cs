@@ -3,6 +3,7 @@ using AutoMapper;
 using Cardo.MessageBus;
 using Cardo.Services.OrderAPI;
 using Cardo.Services.OrderAPI.Data;
+using Cardo.Services.OrderAPI.RabbitMQSender;
 using Cardo.Services.OrderAPI.Utility;
 using Cardo.Services.ShoppingCartAPI.Extensions;
 using Cardo.Services.ShoppingCartAPI.Service;
@@ -29,7 +30,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
 
-builder.Services.AddScoped<IMessageBus, MessageBus>();
+builder.Services.AddScoped<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
 //adds http client to consume product api
 builder.Services.AddHttpClient("Product", u => u.BaseAddress =
     new Uri(builder.Configuration["ServiceUrls:ProductAPI"])).AddHttpMessageHandler<BackendApiAuthenticationHttpClientHandler>();
